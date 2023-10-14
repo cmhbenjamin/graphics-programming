@@ -1,0 +1,2 @@
+/usr/bin/ar qc libglutil.a CMakeFiles/glutil.dir/glutil/source/Debug.cpp.o CMakeFiles/glutil.dir/glutil/source/Font.cpp.o CMakeFiles/glutil.dir/glutil/source/MatrixStack.cpp.o CMakeFiles/glutil.dir/glutil/source/MousePoles.cpp.o CMakeFiles/glutil.dir/glutil/source/Shader.cpp.o CMakeFiles/glutil.dir/glutil/source/WindowPos.cpp.o CMakeFiles/glutil.dir/glutil/source/ftData.cpp.o
+/usr/bin/ranlib libglutil.a

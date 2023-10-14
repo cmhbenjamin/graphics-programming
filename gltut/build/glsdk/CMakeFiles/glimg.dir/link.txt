@@ -1,0 +1,2 @@
+/usr/bin/ar qc libglimg.a CMakeFiles/glimg.dir/glimg/source/DdsLoader.cpp.o CMakeFiles/glimg.dir/glimg/source/ImageCreator.cpp.o CMakeFiles/glimg.dir/glimg/source/ImageFormat.cpp.o CMakeFiles/glimg.dir/glimg/source/ImageSet.cpp.o CMakeFiles/glimg.dir/glimg/source/ImageSetImpl.cpp.o CMakeFiles/glimg.dir/glimg/source/StbLoader.cpp.o CMakeFiles/glimg.dir/glimg/source/TestLoader.cpp.o CMakeFiles/glimg.dir/glimg/source/TextureGenerator.cpp.o CMakeFiles/glimg.dir/glimg/source/Util.cpp.o CMakeFiles/glimg.dir/glimg/source/stb_image.c.o
+/usr/bin/ranlib libglimg.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libframework.a CMakeFiles/framework.dir/Mesh.cpp.o CMakeFiles/framework.dir/Scene.cpp.o CMakeFiles/framework.dir/Timer.cpp.o CMakeFiles/framework.dir/empty.cpp.o CMakeFiles/framework.dir/framework.cpp.o
+/usr/bin/ranlib libframework.a

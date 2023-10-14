@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/tut01.dir/tut01/tut1.cpp.o -o tut01  framework/libframework.a glsdk/libglutil.a glsdk/libglimg.a glsdk/libglload.a glsdk/libfreeglut.a /usr/lib/x86_64-linux-gnu/libGL.so -lX11 

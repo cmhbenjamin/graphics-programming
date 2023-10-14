@@ -1,0 +1,12 @@
+/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/build/CMakeFiles/tut01.dir
+/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/build/CMakeFiles/edit_cache.dir
+/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/build/CMakeFiles/rebuild_cache.dir
+/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/build/glsdk/CMakeFiles/freeglut.dir
+/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/build/glsdk/CMakeFiles/glload.dir
+/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/build/glsdk/CMakeFiles/glimg.dir
+/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/build/glsdk/CMakeFiles/glutil.dir
+/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/build/glsdk/CMakeFiles/edit_cache.dir
+/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/build/glsdk/CMakeFiles/rebuild_cache.dir
+/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/build/framework/CMakeFiles/framework.dir
+/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/build/framework/CMakeFiles/edit_cache.dir
+/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/build/framework/CMakeFiles/rebuild_cache.dir

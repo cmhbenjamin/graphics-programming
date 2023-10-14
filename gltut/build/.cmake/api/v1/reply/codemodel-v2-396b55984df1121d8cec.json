@@ -1,0 +1,140 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"build" : "glsdk",
+					"jsonFile" : "directory-glsdk-e2bc950e159437e57f14.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "glsdk",
+					"targetIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					]
+				},
+				{
+					"build" : "framework",
+					"jsonFile" : "directory-framework-308e10f56f9c91364e93.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "framework",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "tut1_pratice",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "framework::@217a96c3a62328a73ef4",
+					"jsonFile" : "target-framework-df18af26fd08412d4aea.json",
+					"name" : "framework",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "freeglut::@b2ca25d864c866ee5a40",
+					"jsonFile" : "target-freeglut-355d0a74eba33e63ecb2.json",
+					"name" : "freeglut",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "glimg::@b2ca25d864c866ee5a40",
+					"jsonFile" : "target-glimg-db986ded71ccc79d3673.json",
+					"name" : "glimg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "glload::@b2ca25d864c866ee5a40",
+					"jsonFile" : "target-glload-9b85a0eb76b45c04d787.json",
+					"name" : "glload",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "glutil::@b2ca25d864c866ee5a40",
+					"jsonFile" : "target-glutil-7b9d5e10a8d7f8d1cb99.json",
+					"name" : "glutil",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "tut01::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-tut01-1730e099e3363846e7ca.json",
+					"name" : "tut01",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/build",
+		"source" : "/home/ben/Documents/project/graphics_programming/graphics-programming/gltut"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

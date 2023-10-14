@@ -1,0 +1,178 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "framework/libframework.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"framework/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 2,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 4,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 3,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"defines" : 
+			[
+				{
+					"backtrace" : 2,
+					"define" : "FREEGLUT_LIB_PRAGMAS=0"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "FREEGLUT_STATIC"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 3,
+					"path" : "/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/framework/."
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/glsdk/glm"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/glsdk/glload/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/glsdk/glimg/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/glsdk/glutil/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/glsdk/freeglut/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/ben/Documents/project/graphics_programming/graphics-programming/gltut/glsdk/freeglut"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "freeglut::@b2ca25d864c866ee5a40"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "glload::@b2ca25d864c866ee5a40"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "glimg::@b2ca25d864c866ee5a40"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "glutil::@b2ca25d864c866ee5a40"
+		}
+	],
+	"id" : "framework::@217a96c3a62328a73ef4",
+	"name" : "framework",
+	"nameOnDisk" : "libframework.a",
+	"paths" : 
+	{
+		"build" : "framework",
+		"source" : "framework"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "framework/Mesh.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "framework/Scene.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "framework/Timer.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "framework/empty.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "framework/framework.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}
