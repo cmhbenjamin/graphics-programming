@@ -100,11 +100,32 @@ void InitializeProgram()
 	std::for_each(shaderList.begin(), shaderList.end(), glDeleteShader);
 }
 
+// const float vertexPositions[] = {
+// 	0.75f, 0.75f, 0.0f, 1.0f,
+// 	0.75f, -0.75f, 0.0f, 1.0f,
+// 	-0.75f, -0.75f, 0.0f, 1.0f,
+// };
+/*
+//custom positions
+// first point's z is greater than clip space w, os only half of the triangle is shown
 const float vertexPositions[] = {
-	0.75f, 0.75f, 0.0f, 1.0f,
+	0.2f, 0.2f, 2.0f, 1.0f,
 	0.75f, -0.75f, 0.0f, 1.0f,
 	-0.75f, -0.75f, 0.0f, 1.0f,
 };
+*/
+
+const float vertexPositions[] = {
+
+	0.1f, 0.2f, 0.0f, 1.0f,
+	-0.1f, -0.1f, 0.0f, 1.0f,
+	-0.2f, -0.1f, 0.0f, 1.0f,
+	0.1f, 0.2f, 0.0f, 1.0f,
+	0.1f, -0.1f, 0.0f, 1.0f,
+	-0.1f, -0.14f, 0.0f, 1.0f,
+
+};
+
 
 GLuint positionBufferObject;
 GLuint vao;
