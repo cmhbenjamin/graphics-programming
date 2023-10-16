@@ -84,7 +84,16 @@ const std::string strFragmentShader(
 	"out vec4 outputColor;\n"
 	"void main()\n"
 	"{\n"
-	"   outputColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);\n"
+	"   outputColor = vec4(0.1f, 1.0f, 1.0f, 1.0f);\n"
+	"}\n"
+);
+
+const std::string strFragmentShader2(
+	"#version 330\n"
+	"out vec4 outputColor;\n"
+	"void main()\n"
+	"{\n"
+	"   outputColor = vec4(.1f, 1.0f, 1.0f, 1.0f);\n"
 	"}\n"
 );
 
@@ -94,6 +103,7 @@ void InitializeProgram()
 
 	shaderList.push_back(CreateShader(GL_VERTEX_SHADER, strVertexShader));
 	shaderList.push_back(CreateShader(GL_FRAGMENT_SHADER, strFragmentShader));
+	//shaderList.push_back(CreateShader(GL_FRAGMENT_SHADER, strFragmentShader2));
 
 	theProgram = CreateProgram(shaderList);
 
@@ -115,6 +125,7 @@ const float vertexPositions[] = {
 };
 */
 
+//try drawing another triangle
 const float vertexPositions[] = {
 
 	0.1f, 0.2f, 0.0f, 1.0f,
@@ -164,7 +175,10 @@ void display()
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	//glDrawArrays(GL_TRIANGLES, 0, 3);
+	// draw another triangle
+	//glDrawArrays(GL_TRIANGLES, 4, 3);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 
 	glDisableVertexAttribArray(0);
 	glUseProgram(0);
@@ -176,7 +190,28 @@ void display()
 //This is an opportunity to call glViewport or glScissor to keep up with the change in size.
 void reshape (int w, int h)
 {
-	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+	//glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+
+	/*
+	// make it doesn't stretch
+	int size =w>h?h:w;
+	glViewport(0, 0, (GLsizei) size, (GLsizei) size);
+	*/
+
+	//make it center
+	int size =0;
+	std::vector<int> center = {0,0};
+
+	if(w>h){
+		size = h;
+		center={(w-size)/2,0};
+	}else{
+		size = w;
+		center={0,(h-size)/2};
+	}
+
+	glViewport(center[0], center[1], (GLsizei) size, (GLsizei) size);
+
 }
 
 //Called whenever a key on the keyboard was pressed.
