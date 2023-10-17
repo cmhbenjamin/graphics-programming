@@ -14,4 +14,14 @@ function(add_tutorial base_dir tgt_name)
     target_link_libraries(${tgt_name} PRIVATE framework)
 endfunction()
 
-add_tutorial("tut01" "tut01" "tut1.cpp")
+
+## copy all data files to the build directory
+file(COPY "data" DESTINATION "${CMAKE_BINARY_DIR}")
+file(GLOB data_dirs "tut*/data")
+foreach(data_dir ${data_dirs})
+    file(COPY "${data_dir}" DESTINATION "${CMAKE_BINARY_DIR}")
+endforeach()
+
+#add_tutorial("tut01" "tut01" "tut1.cpp")
+add_tutorial("tut02" "tut02_frag_pos" "FragPosition.cpp")
+add_tutorial("tut02" "tut02_vertex_color" "VertexColors.cpp")
