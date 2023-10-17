@@ -7,7 +7,10 @@ Frag Coord use screenspace coord, relative to window.
 ## Further Study
 1. By scaling up the y of fragPosition tutorial, more of the triangle become dark, since mix value get higher when gl_FraCoord increases. It turns completely dark when mix is greater than 1.
 
-2. Tried creating a vignette effects in fragment shader:
+2. Creating a vignette effects in fragment shader:
+    ![Screenshot of applying vignette effect on the triangle](./gltut_02_vertex_color_vignette.png)
+
+
     1. Find the screen size to get the center coordinate
         get window size in shader:
         https://community.khronos.org/t/window-size-in-glsl/57179/8
