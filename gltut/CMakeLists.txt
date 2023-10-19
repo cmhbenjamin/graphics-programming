@@ -23,5 +23,11 @@ foreach(data_dir ${data_dirs})
 endforeach()
 
 #add_tutorial("tut01" "tut01" "tut1.cpp")
-add_tutorial("tut02" "tut02_frag_pos" "FragPosition.cpp")
-add_tutorial("tut02" "tut02_vertex_color" "VertexColors.cpp")
+
+#add_tutorial("tut02" "tut02_frag_pos" "FragPosition.cpp")
+#add_tutorial("tut02" "tut02_vertex_color" "VertexColors.cpp")
+
+add_tutorial("tut03" "Tut03CPUPositionOffset" "CPUPositionOffset.cpp")
+add_tutorial("tut03" "Tut03ShaderPositionOffset" "VertPositionOffset.cpp")
+add_tutorial("tut03" "Tut03ShaderCalcOffset" "VertCalcOffset.cpp")
+add_tutorial("tut03" "Tut03FragmentChangeColor" "FragChangeColor.cpp")
