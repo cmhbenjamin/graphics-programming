@@ -27,7 +27,7 @@ void InitializeProgram()
 
 	glUseProgram(theProgram);
 	glUniform1f(loopDurationUnf, 5.0f);
-	glUniform1f(fragLoopDurUnf, 10.0f);
+	glUniform1f(fragLoopDurUnf, 5.0f);
 	glUseProgram(0);
 }
 

@@ -21,6 +21,12 @@ void InitializeProgram()
 	shaderList.push_back(Framework::LoadShader(GL_FRAGMENT_SHADER, "FragPosition.frag"));
 
 	theProgram = Framework::CreateProgram(shaderList);
+	/*
+	glUseProgram(theProgram);
+	height = glutGet(GLUT_SCREEN_HEIGHT);
+	glUseProgram(0);
+	*/
+
 }
 
 const float vertexData[] = {
@@ -78,6 +84,10 @@ void display()
 //This is an opportunity to call glViewport or glScissor to keep up with the change in size.
 void reshape (int w, int h)
 {
+	glUseProgram(theProgram);
+	GLint heightUnf = glGetUniformLocation(theProgram, "height");
+	glUniform1f(heightUnf, h);
+	glUseProgram(0);
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 }
 

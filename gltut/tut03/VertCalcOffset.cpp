@@ -74,7 +74,9 @@ void display()
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glUniform1f(elapsedTimeUniform, (glutGet(GLUT_ELAPSED_TIME) / 1000.0f)+2.5f);
 
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glDisableVertexAttribArray(0);
 	glUseProgram(0);
 
