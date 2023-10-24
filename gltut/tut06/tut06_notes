@@ -1,0 +1,51 @@
+# tut06 
+## Further studies
+1. >In the Translation tutorial, we had two objects that rotated around a specific point. This was achieved by computing the offset for the rotated position on the CPU, not through the use of a rotation transformation. Change this code to use rotation transformations instead. Make sure that the orientation of the objects do not change as they are being rotated around; this will require applying more than one rotation transformation.
+    Using Rotation function from "Rotations.cpp", do:
+        1. Inverse rotation for counter rotation
+        2. translate in xy
+        3. rotation in z axis
+        4. translate in z
+    note the multiplcation order, right side is applied first
+
+    ```C
+        glm::mat3 RotateZ(float fElapsedTime, float duration)
+        {
+            float fAngRad = ComputeAngleRad(fElapsedTime, duration);
+            float fCos = cosf(fAngRad);
+            float fSin = sinf(fAngRad);
+
+            glm::mat3 theMat(1.0f);
+            theMat[0].x = fCos; theMat[1].x = -fSin;
+            theMat[0].y = fSin; theMat[1].y = fCos;
+            return theMat;
+        }
+
+        struct Instance
+        {
+            typedef glm::mat3(*RotationFunc)(float,float);
+
+            RotationFunc CalcRotation;
+            glm::vec3 offset;
+            float duration;
+
+            glm::mat4 ConstructMatrix(float fElapsedTime)
+            {
+                glm::mat4 rotMat = glm::mat4(CalcRotation(fElapsedTime,duration));
+                glm::mat4 transMatxy(1.0f);
+                transMatxy[3] = glm::vec4(offset.x,offset.y,0,1);
+                glm::mat4 transMatz(1.0f);
+                transMatz[3] = glm::vec4(0,0,offset.z,1);
+
+                return transMatz*rotMat*transMatxy*glm::inverse(rotMat);
+            }
+        };
+
+        Instance g_instanceList[] =
+        {
+            {NullRotation,				glm::vec3(0.0f, 0.0f, -25.0f), 0},
+            {RotateZ,					glm::vec3(-5.0f, -5.0f, -25.0f), 3},
+
+        };
+    ```
+2. 

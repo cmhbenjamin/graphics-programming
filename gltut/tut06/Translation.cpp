@@ -209,17 +209,14 @@ struct Instance
 
 	glm::mat4 ConstructMatrix(float fElapsedTime)
 	{
-		glm::mat4 theMat(1.0f);
-		theMat = glm::mat4(CalcRotation(fElapsedTime,duration*-1))*theMat;
+		glm::mat4 rotMat = glm::mat4(CalcRotation(fElapsedTime,duration));
 		//show_mat(theMat);
-		theMat[3] = glm::vec4(offset.x,offset.y,0,1);
-		theMat = glm::mat4(CalcRotation(fElapsedTime,duration))*theMat;
+		glm::mat4 transMatxy(1.0f);
+		transMatxy[3] = glm::vec4(offset.x,offset.y,0,1);
+		glm::mat4 transMatz(1.0f);
+		transMatz[3] = glm::vec4(0,0,offset.z,1);
 
-		glm::mat4 transMat(1.0f);
-		transMat[3] = glm::vec4(0,0,offset.z,1);
-		theMat*=transMat;
-
-		return theMat;
+		return transMatz*rotMat*transMatxy*glm::inverse(rotMat);
 	}
 };
 /*
