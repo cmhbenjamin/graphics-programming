@@ -31,7 +31,7 @@ void InitializeProgram()
 
 	perspectiveMatrixUnif = glGetUniformLocation(theProgram, "perspectiveMatrix");
 
-	float fzNear = 0.5f; float fzFar = 3.0f;
+	float fzNear = 1.0f; float fzFar =  3.0f;
 
 	memset(perspectiveMatrix, 0, sizeof(float) * 16);
 

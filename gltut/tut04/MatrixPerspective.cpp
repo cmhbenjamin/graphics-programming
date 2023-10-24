@@ -183,7 +183,7 @@ void display()
 
 	glUseProgram(theProgram);
 
-	glUniform2f(offsetUniform, 0.5f, 0.5f);
+	glUniform2f(offsetUniform, 0.0f, 0.5f);
 
 	size_t colorData = sizeof(vertexData) / 2;
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
