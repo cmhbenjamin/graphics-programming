@@ -311,8 +311,9 @@ private:
 
 // custom node 
 
-#include <typeinfo>
-#include <iostream>
+//#include <typeinfo>
+//#include <iostream>
+
 class GeoNode
 {
 public:
@@ -321,13 +322,17 @@ public:
 
 	void drawTree(MatrixStack &modelToCameraStack)
 	{
+		
 		transform(modelToCameraStack);
 		draw(modelToCameraStack);
 		modelToCameraStack.Push();
 		for(auto &g:children)
 		{
 			//std::cout<<typeid(*g).name();
+			modelToCameraStack.Push();
 			g->drawTree(modelToCameraStack);
+			modelToCameraStack.Pop();
+			
 		}
 		modelToCameraStack.Pop();
 	}
@@ -459,6 +464,10 @@ public:
 		angUpperArm += bIncrement ? STANDARD_ANGLE_INCREMENT : -STANDARD_ANGLE_INCREMENT;
 		angUpperArm = Clamp(angUpperArm, -90.0f, 0.0f);
 	}
+	void write()
+	{
+		printf("angUpperArm:\t%f\n", angUpperArm);
+	}
 
 private:
 	void transform(MatrixStack &modelToCameraStack)
@@ -469,105 +478,52 @@ private:
 	float sizeUpperArm;
 };
 
-/*
-
-class UpperArm:public GeoNode
+class LowerArm: public RecNode
 {
 public:
-	UpperArm():
-		angUpperArm(-33.75f)
-		, sizeUpperArm(9.0f)
-	{}
-	void AdjUpperArm(bool bIncrement)
-	{
-		angUpperArm += bIncrement ? STANDARD_ANGLE_INCREMENT : -STANDARD_ANGLE_INCREMENT;
-		angUpperArm = Clamp(angUpperArm, -90.0f, 0.0f);
-	}
-private:
-	void draw(MatrixStack &modelToCameraStack)
-	{
-		glUseProgram(theProgram);
-		glBindVertexArray(vao);
-
-
-		modelToCameraStack.RotateX(angUpperArm);
-
-		{
-			modelToCameraStack.Push();
-			modelToCameraStack.Translate(glm::vec3(0.0f, 0.0f, (sizeUpperArm / 2.0f) - 1.0f));
-			modelToCameraStack.Scale(glm::vec3(1.0f, 1.0f, sizeUpperArm / 2.0f));
-			glUniformMatrix4fv(modelToCameraMatrixUnif, 1, GL_FALSE, glm::value_ptr(modelToCameraStack.Top()));
-			glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexData), GL_UNSIGNED_SHORT, 0);
-			modelToCameraStack.Pop();
-		}
-
-
-		glBindVertexArray(0);
-		glUseProgram(0);
-	}
-	void write(){
-		printf("angUpperArm:\t%f\n", angUpperArm);
-	}
-	float angUpperArm;
-	float sizeUpperArm;
-
-};
-
-
-class LowerArm:public GeoNode
-{
-public:
-	LowerArm():
-		posLowerArm(glm::vec3(0.0f, 0.0f, 8.0f))
+	LowerArm()
+		: posLowerArm(glm::vec3(0.0f, 0.0f, 8.0f))
 		, angLowerArm(146.25f)
 		, lenLowerArm(5.0f)
 		, widthLowerArm(1.5f)
-	{}
+	{
+		origin = glm::vec3(0.0f, 0.0f, lenLowerArm / 2.0f);
+		size = glm::vec3(widthLowerArm / 2.0f, widthLowerArm / 2.0f, lenLowerArm / 2.0f);
+	}
 	void AdjLowerArm(bool bIncrement)
 	{
 		angLowerArm += bIncrement ? STANDARD_ANGLE_INCREMENT : -STANDARD_ANGLE_INCREMENT;
 		angLowerArm = Clamp(angLowerArm, 0.0f, 146.25f);
 	}
-private:
-	void draw(MatrixStack &modelToCameraStack)
-	{
-		glUseProgram(theProgram);
-		glBindVertexArray(vao);
-
-
-		modelToCameraStack.Translate(posLowerArm);
-		modelToCameraStack.RotateX(angLowerArm);
-
-		modelToCameraStack.Push();
-		modelToCameraStack.Translate(glm::vec3(0.0f, 0.0f, lenLowerArm / 2.0f));
-		modelToCameraStack.Scale(glm::vec3(widthLowerArm / 2.0f, widthLowerArm / 2.0f, lenLowerArm / 2.0f));
-		glUniformMatrix4fv(modelToCameraMatrixUnif, 1, GL_FALSE, glm::value_ptr(modelToCameraStack.Top()));
-		glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexData), GL_UNSIGNED_SHORT, 0);
-		modelToCameraStack.Pop();
-
-		glBindVertexArray(0);
-		glUseProgram(0);
-	}
 	void write()
 	{
 		printf("angLowerArm:\t%f\n", angLowerArm);
+	}
+
+private:
+	void transform(MatrixStack &modelToCameraStack)
+	{
+		modelToCameraStack.Translate(posLowerArm);
+		modelToCameraStack.RotateX(angLowerArm);
 	}
 	glm::vec3		posLowerArm;
 	float			angLowerArm;
 	float			lenLowerArm;
 	float			widthLowerArm;
 };
-
-class Wist:public GeoNode
+class Wrist: public RecNode
 {
 public:
-	Wist():
-		posWrist(glm::vec3(0.0f, 0.0f, 5.0f))
+	Wrist()
+		: posWrist(glm::vec3(0.0f, 0.0f, 5.0f))
 		, angWristRoll(0.0f)
 		, angWristPitch(67.5f)
 		, lenWrist(2.0f)
 		, widthWrist(2.0f)
-	{}
+	{
+		origin = glm::vec3(0.0f, 0.0f, 0.0f);
+		size = glm::vec3(widthWrist / 2.0f, widthWrist/ 2.0f, lenWrist / 2.0f);
+	}
 	void AdjWristPitch(bool bIncrement)
 	{
 		angWristPitch += bIncrement ? STANDARD_ANGLE_INCREMENT : -STANDARD_ANGLE_INCREMENT;
@@ -579,30 +535,18 @@ public:
 		angWristRoll += bIncrement ? STANDARD_ANGLE_INCREMENT : -STANDARD_ANGLE_INCREMENT;
 		angWristRoll = fmodf(angWristRoll, 360.0f);
 	}
-private:
-	void draw(MatrixStack &modelToCameraStack)
-	{
-		glUseProgram(theProgram);
-		glBindVertexArray(vao);
-
-
-		modelToCameraStack.Translate(posWrist);
-		modelToCameraStack.RotateZ(angWristRoll);
-		modelToCameraStack.RotateX(angWristPitch);
-
-		modelToCameraStack.Push();
-		modelToCameraStack.Scale(glm::vec3(widthWrist / 2.0f, widthWrist/ 2.0f, lenWrist / 2.0f));
-		glUniformMatrix4fv(modelToCameraMatrixUnif, 1, GL_FALSE, glm::value_ptr(modelToCameraStack.Top()));
-		glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexData), GL_UNSIGNED_SHORT, 0);
-		modelToCameraStack.Pop();
-
-		glBindVertexArray(0);
-		glUseProgram(0);
-	}
 	void write()
 	{
 		printf("angWristPitch:\t%f\n", angWristPitch);
 		printf("angWristRoll:\t%f\n", angWristRoll);
+	}
+
+private:
+	void transform(MatrixStack &modelToCameraStack)
+	{
+		modelToCameraStack.Translate(posWrist);
+		modelToCameraStack.RotateZ(angWristRoll);
+		modelToCameraStack.RotateX(angWristPitch);
 	}
 	glm::vec3		posWrist;
 	float			angWristRoll;
@@ -611,98 +555,127 @@ private:
 	float			widthWrist;
 };
 
-class Fingers:public GeoNode
+class LeftFinger : public RecNode
 {
 public:
-	Fingers():
-		posLeftFinger(glm::vec3(1.0f, 0.0f, 1.0f))
-		, posRightFinger(glm::vec3(-1.0f, 0.0f, 1.0f))
+	LeftFinger()
+		: posLeftFinger(glm::vec3(1.0f, 0.0f, 1.0f))
 		, angFingerOpen(180.0f)
 		, lenFinger(2.0f)
 		, widthFinger(0.5f)
-		, angLowerFinger(45.0f)
-	{}
+	{
+		origin = glm::vec3(0.0f, 0.0f, lenFinger / 2.0f);
+		size = glm::vec3(widthFinger / 2.0f, widthFinger/ 2.0f, lenFinger / 2.0f);
+	}
 	void AdjFingerOpen(bool bIncrement)
 	{
 		angFingerOpen += bIncrement ? SMALL_ANGLE_INCREMENT : -SMALL_ANGLE_INCREMENT;
 		angFingerOpen = Clamp(angFingerOpen, 9.0f, 180.0f);
 	}
-private:
-	void draw(MatrixStack &modelToCameraStack)
+	void write()
 	{
-		glUseProgram(theProgram);
-		glBindVertexArray(vao);
+		printf("angFingerOpen:\t%f\n", angFingerOpen);
+	}
 
+private:
+	void transform(MatrixStack &modelToCameraStack)
+	{
 
 		modelToCameraStack.Translate(posLeftFinger);
 		modelToCameraStack.RotateY(angFingerOpen);
+	}
+	glm::vec3		posLeftFinger;
+	float			angFingerOpen;
+	float			lenFinger;
+	float			widthFinger;
+};
+class LeftFingerLower : public RecNode
+{
+public:
+	LeftFingerLower()
+		: lenFinger(2.0f)
+		, widthFinger(0.5f)
+		, angLowerFinger(45.0f)
+	{
+		origin = glm::vec3(0.0f, 0.0f, lenFinger / 2.0f);
+		size = glm::vec3(widthFinger / 2.0f, widthFinger/ 2.0f, lenFinger / 2.0f);
+	}
 
-		modelToCameraStack.Push();
-		modelToCameraStack.Translate(glm::vec3(0.0f, 0.0f, lenFinger / 2.0f));
-		modelToCameraStack.Scale(glm::vec3(widthFinger / 2.0f, widthFinger/ 2.0f, lenFinger / 2.0f));
-		glUniformMatrix4fv(modelToCameraMatrixUnif, 1, GL_FALSE, glm::value_ptr(modelToCameraStack.Top()));
-		glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexData), GL_UNSIGNED_SHORT, 0);
-		modelToCameraStack.Pop();
 
-		{
-			//Draw left lower finger
-			modelToCameraStack.Push();
-			modelToCameraStack.Translate(glm::vec3(0.0f, 0.0f, lenFinger));
-			modelToCameraStack.RotateY(-angLowerFinger);
+private:
+	void transform(MatrixStack &modelToCameraStack)
+	{
+		modelToCameraStack.Translate(glm::vec3(0.0f, 0.0f, lenFinger));
+		modelToCameraStack.RotateY(-angLowerFinger);
 
-			modelToCameraStack.Push();
-			modelToCameraStack.Translate(glm::vec3(0.0f, 0.0f, lenFinger / 2.0f));
-			modelToCameraStack.Scale(glm::vec3(widthFinger / 2.0f, widthFinger/ 2.0f, lenFinger / 2.0f));
-			glUniformMatrix4fv(modelToCameraMatrixUnif, 1, GL_FALSE, glm::value_ptr(modelToCameraStack.Top()));
-			glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexData), GL_UNSIGNED_SHORT, 0);
-			modelToCameraStack.Pop();
+	}
 
-			modelToCameraStack.Pop();
-		}
-		modelToCameraStack.Pop();
+	float			lenFinger;
+	float			widthFinger;
+	float			angLowerFinger;
+};
 
-		//Draw right finger
-		modelToCameraStack.Push();
-		modelToCameraStack.Translate(posRightFinger);
-		modelToCameraStack.RotateY(-angFingerOpen);
-
-		modelToCameraStack.Push();
-		modelToCameraStack.Translate(glm::vec3(0.0f, 0.0f, lenFinger / 2.0f));
-		modelToCameraStack.Scale(glm::vec3(widthFinger / 2.0f, widthFinger/ 2.0f, lenFinger / 2.0f));
-		glUniformMatrix4fv(modelToCameraMatrixUnif, 1, GL_FALSE, glm::value_ptr(modelToCameraStack.Top()));
-		glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexData), GL_UNSIGNED_SHORT, 0);
-		modelToCameraStack.Pop();
-
-		{
-			//Draw right lower finger
-			modelToCameraStack.Push();
-			modelToCameraStack.Translate(glm::vec3(0.0f, 0.0f, lenFinger));
-			modelToCameraStack.RotateY(angLowerFinger);
-
-			modelToCameraStack.Push();
-			modelToCameraStack.Translate(glm::vec3(0.0f, 0.0f, lenFinger / 2.0f));
-			modelToCameraStack.Scale(glm::vec3(widthFinger / 2.0f, widthFinger/ 2.0f, lenFinger / 2.0f));
-			glUniformMatrix4fv(modelToCameraMatrixUnif, 1, GL_FALSE, glm::value_ptr(modelToCameraStack.Top()));
-			glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexData), GL_UNSIGNED_SHORT, 0);
-			modelToCameraStack.Pop();
-
-			modelToCameraStack.Pop();
-		}
-		
-		glBindVertexArray(0);
-		glUseProgram(0);
+class RightFinger : public RecNode
+{
+public:
+	RightFinger()
+		: posRightFinger(glm::vec3(-1.0f, 0.0f, 1.0f))
+		, angFingerOpen(180.0f)
+		, lenFinger(2.0f)
+		, widthFinger(0.5f)
+	{
+		origin = glm::vec3(0.0f, 0.0f, lenFinger / 2.0f);
+		size = glm::vec3(widthFinger / 2.0f, widthFinger/ 2.0f, lenFinger / 2.0f);
+	}
+	void AdjFingerOpen(bool bIncrement)
+	{
+		angFingerOpen += bIncrement ? SMALL_ANGLE_INCREMENT : -SMALL_ANGLE_INCREMENT;
+		angFingerOpen = Clamp(angFingerOpen, 9.0f, 180.0f);
 	}
 	void write()
 	{
 		printf("angFingerOpen:\t%f\n", angFingerOpen);
 	}
-	glm::vec3		posLeftFinger, posRightFinger;
+
+private:
+	void transform(MatrixStack &modelToCameraStack)
+	{
+
+		modelToCameraStack.Translate(posRightFinger);
+		modelToCameraStack.RotateY(-angFingerOpen);
+	}
+	glm::vec3		posRightFinger;
 	float			angFingerOpen;
+	float			lenFinger;
+	float			widthFinger;
+};
+class RightFingerLower : public RecNode
+{
+public:
+	RightFingerLower()
+		: lenFinger(2.0f)
+		, widthFinger(0.5f)
+		, angLowerFinger(45.0f)
+	{
+		origin = glm::vec3(0.0f, 0.0f, lenFinger / 2.0f);
+		size = glm::vec3(widthFinger / 2.0f, widthFinger/ 2.0f, lenFinger / 2.0f);
+	}
+
+
+private:
+	void transform(MatrixStack &modelToCameraStack)
+	{
+		
+		modelToCameraStack.Translate(glm::vec3(0.0f, 0.0f, lenFinger));
+		modelToCameraStack.RotateY(angLowerFinger);
+
+	}
+
 	float			lenFinger;
 	float			widthFinger;
 	float			angLowerFinger;
 };
-*/
+
 void WritePose(GeoNode &node)
 {
 	node.writePose();
@@ -720,6 +693,12 @@ Base base;
 BaseLeft baseleft;
 BaseRight baseright;
 UpperArm upperarm;
+LowerArm lowerarm;
+Wrist wrist;
+LeftFinger leftfinger;
+LeftFingerLower leftfingerlower;
+RightFinger rightfinger;
+RightFingerLower rightfingerlower;
 
 
 
@@ -744,6 +723,12 @@ void init()
 	base.children.push_back(&baseleft);
 	base.children.push_back(&baseright);
 	base.children.push_back(&upperarm);
+	upperarm.children.push_back(&lowerarm);
+	lowerarm.children.push_back(&wrist);
+	wrist.children.push_back(&leftfinger);
+	wrist.children.push_back(&rightfinger);
+	leftfinger.children.push_back(&leftfingerlower);
+	rightfinger.children.push_back(&rightfingerlower);
 	
 }
 
@@ -794,16 +779,24 @@ void keyboard(unsigned char key, int x, int y)
 	
 	case 'w': upperarm.AdjUpperArm(false); break;
 	case 's': upperarm.AdjUpperArm(true); break;
-	/*
+	
 	case 'r': lowerarm.AdjLowerArm(false); break;
 	case 'f': lowerarm.AdjLowerArm(true); break;
-	case 't': wist.AdjWristPitch(false); break;
-	case 'g': wist.AdjWristPitch(true); break;
-	case 'z': wist.AdjWristRoll(true); break;
-	case 'c': wist.AdjWristRoll(false); break;
-	case 'q': fingers.AdjFingerOpen(true); break;
-	case 'e': fingers.AdjFingerOpen(false); break;
-	*/
+	
+	case 't': wrist.AdjWristPitch(false); break;
+	case 'g': wrist.AdjWristPitch(true); break;
+	case 'z': wrist.AdjWristRoll(true); break;
+	case 'c': wrist.AdjWristRoll(false); break;
+	
+	case 'q': 
+		leftfinger.AdjFingerOpen(true); 
+		rightfinger.AdjFingerOpen(true);
+		break;
+	case 'e': 
+		leftfinger.AdjFingerOpen(false); 
+		rightfinger.AdjFingerOpen(false);
+		break;
+	
 	case 'p': WritePose(scene); break;
 	}
 }
